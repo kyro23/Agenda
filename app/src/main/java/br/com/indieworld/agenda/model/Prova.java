@@ -1,12 +1,13 @@
 package br.com.indieworld.agenda.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Junior on 23/09/2017.
  */
 
-public class Prova {
+public class Prova implements Serializable{
     private String materia;
     private String data;
     private List<String> topicos;

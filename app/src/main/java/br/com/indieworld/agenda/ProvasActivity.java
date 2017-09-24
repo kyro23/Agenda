@@ -1,12 +1,15 @@
 package br.com.indieworld.agenda;
 
+import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,25 +23,37 @@ public class ProvasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provas);
 
-        List<String> topicosPort = Arrays.asList("Sujeito", "Objeto direto", "Objeto Indireto");
-        Prova provaPortugues = new Prova("Portuges", "23/09/2017", topicosPort);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction tx = fragmentManager.beginTransaction();
 
-        List<String> topicosMat = Arrays.asList("Equações de 2 grau", "Trigonometria");
-        Prova provaMatematica = new Prova("Matematica", "23/09/2017", topicosMat);
+        tx.replace(R.id.frame_principal, new ListaProvasFragment());
+        if(isLandscape()) {
+            tx.replace(R.id.frame_secundario, new DetalhesProvaFragment());
+        }
 
-        List<Prova> provas = Arrays.asList(provaPortugues, provaMatematica);
+        tx.commit();
+    }
 
-        ArrayAdapter<Prova> adapter = new ArrayAdapter<Prova>(this, android.R.layout.simple_list_item_1, provas);
+    private boolean isLandscape() {
+        return getResources().getBoolean(R.bool.modoPaisagem);
+    }
 
-        ListView lista = (ListView) findViewById(R.id.provas_lista);
-        lista.setAdapter(adapter);
+    public void selecionaProva(Prova prova) {
+        FragmentManager manager = getSupportFragmentManager();
+        if (!isLandscape()) {
+            FragmentTransaction tx = manager.beginTransaction();
+            DetalhesProvaFragment detalhesFragment = new DetalhesProvaFragment();
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Prova prova = (Prova) adapterView.getItemAtPosition(i);
-                Toast.makeText(ProvasActivity.this, "Clicou na prova de "+prova, Toast.LENGTH_SHORT).show();
-            }
-        });
+            Bundle param = new Bundle();
+            param.putSerializable("prova", prova);
+            detalhesFragment.setArguments(param);
+
+            tx.replace(R.id.frame_principal, detalhesFragment);
+            tx.addToBackStack(null);
+            tx.commit();
+        } else {
+            DetalhesProvaFragment detalhesFrag = (DetalhesProvaFragment) manager.findFragmentById(R.id.frame_secundario);
+            detalhesFrag.populaCampos(prova);
+        }
     }
 }
