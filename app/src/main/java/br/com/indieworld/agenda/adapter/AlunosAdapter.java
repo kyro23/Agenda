@@ -10,11 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-import br.com.indieworld.agenda.ListaAlunosActivity;
 import br.com.indieworld.agenda.R;
 import br.com.indieworld.agenda.model.Aluno;
 
@@ -44,7 +41,7 @@ public class AlunosAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return alunos.get(i).getId();
+        return 0;
     }
 
     @Override
@@ -68,7 +65,7 @@ public class AlunosAdapter extends BaseAdapter {
 
         TextView campoEndereco = (TextView) view.findViewById(R.id.item_endereco);
         if(campoEndereco != null) {
-            campoEndereco.setText(aluno.getEdereco());
+            campoEndereco.setText(aluno.getEndereco());
         }
 
         TextView camposite = (TextView) view.findViewById(R.id.item_site);

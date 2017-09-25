@@ -43,7 +43,7 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
 
         AlunoDAO alunoDao = new AlunoDAO(getContext());
         for(Aluno aluno : alunoDao.buscaAlunos()){
-            LatLng coordenada = pegaCoordenadaDoEndereco(aluno.getEdereco());
+            LatLng coordenada = pegaCoordenadaDoEndereco(aluno.getEndereco());
             if(coordenada != null){
                 MarkerOptions marcador = new MarkerOptions();
                 marcador.position(coordenada);

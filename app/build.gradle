@@ -20,6 +20,10 @@ android {
             debuggable true
         }
     }
+
+    packagingOptions{
+        exclude 'META-INF/LICENSE'
+    }
 }
 
 dependencies {
@@ -35,4 +39,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:11.0.2'
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services:11.0.2'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-jackson:2.3.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
 }

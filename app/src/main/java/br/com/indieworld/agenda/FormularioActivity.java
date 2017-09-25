@@ -2,26 +2,26 @@ package br.com.indieworld.agenda;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.IOException;
 
 import br.com.indieworld.agenda.dao.AlunoDAO;
 import br.com.indieworld.agenda.model.Aluno;
+import br.com.indieworld.agenda.retrofit.RetrofitInicializador;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FormularioActivity extends AppCompatActivity {
 
@@ -89,6 +89,20 @@ public class FormularioActivity extends AppCompatActivity {
                     dao.insere(aluno);
                 }
                 dao.close();
+
+                Call call = new RetrofitInicializador().getAlunoService().insere(aluno);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onResponse(Call call, Response response) {
+                        Log.i("onResponse", "SUCESSO PORRAAAA! ");
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+                        Log.e("onFailure", "FUDEU DEU MERDA AE FILHÃO ");
+                    }
+                });
+
 
                 Toast.makeText(FormularioActivity.this, "Aluno "+aluno.getNome()+" Salvo!", Toast.LENGTH_SHORT).show();
 

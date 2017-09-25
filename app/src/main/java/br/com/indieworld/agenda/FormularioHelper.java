@@ -34,7 +34,7 @@ public class FormularioHelper {
 
     public Aluno pegaAluno() {
         aluno.setNome(campoNome.getText().toString());
-        aluno.setEdereco(campoEndereco.getText().toString());
+        aluno.setEndereco(campoEndereco.getText().toString());
         aluno.setTelefone(campoTelefone.getText().toString());
         aluno.setSite(campoSite.getText().toString());
         aluno.setNota((double) campoNota.getProgress());
@@ -45,7 +45,7 @@ public class FormularioHelper {
 
     public void preencheFormulario(Aluno aluno) {
         campoNome.setText(aluno.getNome());
-        campoEndereco.setText(aluno.getEdereco());
+        campoEndereco.setText(aluno.getEndereco());
         campoTelefone.setText(aluno.getTelefone());
         campoSite.setText(aluno.getSite());
         campoNota.setProgress((int) aluno.getNota());

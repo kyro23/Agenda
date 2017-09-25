@@ -1,4 +1,4 @@
-package br.com.indieworld.agenda;
+package br.com.indieworld.agenda.tasks;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import br.com.indieworld.agenda.web.WebClient;
 import br.com.indieworld.agenda.converter.AlunoConverter;
 import br.com.indieworld.agenda.dao.AlunoDAO;
 import br.com.indieworld.agenda.model.Aluno;

@@ -1,4 +1,6 @@
-package br.com.indieworld.agenda;
+package br.com.indieworld.agenda.web;
+
+import android.support.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -14,8 +16,15 @@ import java.util.Scanner;
 public class WebClient {
 
     public String post(String json){
+        String endereco = "https://www.caelum.com.br/mobile";
+        return realizaConexao(json, endereco);
+
+    }
+
+    @Nullable
+    private String realizaConexao(String json, String endereco) {
         try {
-            URL url = new URL("https://www.caelum.com.br/mobile");
+            URL url = new URL(endereco);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("content-type", "application/json");
             connection.setRequestProperty("Accept", "application/json");

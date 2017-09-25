@@ -1,25 +1,31 @@
 package br.com.indieworld.agenda.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 /**
  * Created by Junior on 16/09/2017.
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Aluno implements Serializable{
-    private Long id;
+
+    private String id;
     private String nome;
-    private String edereco;
+    private String endereco;
     private String telefone;
     private String site;
     private double nota;
     private String caminhoFoto;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -31,12 +37,12 @@ public class Aluno implements Serializable{
         this.nome = nome;
     }
 
-    public String getEdereco() {
-        return edereco;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setEdereco(String edereco) {
-        this.edereco = edereco;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public String getTelefone() {
